@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -12,6 +12,10 @@ import HighscoresPage from './pages/HighscoresPage';
 
 const App = () => {
   const { token, username, isAdmin, logout } = useContext(AuthContext); // ✅ isAdmin 포함
+
+  useEffect(() => {
+    console.log(isAdmin)
+  }, [isAdmin])
 
   return (
     <BrowserRouter>
