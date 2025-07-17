@@ -11,7 +11,7 @@ import AllSentencesPage from './pages/AllSentencesPage';
 import HighscoresPage from './pages/HighscoresPage';
 
 const App = () => {
-  const { token, username, logout } = useContext(AuthContext);
+  const { token, username, isAdmin, logout } = useContext(AuthContext); // ✅ isAdmin 추가
 
   return (
     <BrowserRouter>
@@ -21,15 +21,15 @@ const App = () => {
           {token ? (
             <>
               <Link to="/">연습</Link>
-        <Link to="/mypage">기록</Link>
-        <Link to="/profile">프로필</Link>
-        <Link to="/mysentences">내 글</Link>
-        <Link to="/highscores">랭킹</Link>
-        {/* 관리자인 경우 */}
-        {isAdmin && <Link to="/admin/sentences">글 관리</Link>}
-        <button onClick={logout}>로그아웃</button>
-      </>
-    ) : (
+              <Link to="/mypage">기록</Link>
+              <Link to="/profile">프로필</Link>
+              <Link to="/mysentences">내 글</Link>
+              <Link to="/highscores">랭킹</Link>
+              {/* ✅ 관리자 메뉴 */}
+              {isAdmin && <Link to="/admin/sentences">글 관리</Link>}
+              <button onClick={logout}>로그아웃</button>
+            </>
+          ) : (
             <>
               <Link to="/login">로그인</Link>
               <Link to="/register">회원가입</Link>
@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/mypage" element={token ? <MyPage /> : <Navigate to="/login" />} />
         <Route path="/profile" element={token ? <ProfilePage /> : <Navigate to="/login" />} />
         <Route path="/mysentences" element={token ? <MySentencesPage /> : <Navigate to="/login" />} />
-        <Route path="/admin/sentences" element={token ? <AllSentencesPage /> : <Navigate to="/login" />} />
+        <Route path="/admin/sentences" element={token && isAdmin ? <AllSentencesPage /> : <Navigate to="/login" />} />
         <Route path="/highscores" element={<HighscoresPage />} />
       </Routes>
     </BrowserRouter>
