@@ -25,8 +25,7 @@ const App = () => {
               <Link to="/profile">프로필</Link>
               <Link to="/mysentences">내 글</Link>
               <Link to="/highscores">랭킹</Link>
-              {/* ✅ 관리자 메뉴 */}
-              {isAdmin && <Link to="/admin/sentences">글 관리</Link>}
+              {isAdmin && <Link to="/admin/sentences">글 관리</Link>} {/* ✅ 관리자만 표시 */}
               <button onClick={logout}>로그아웃</button>
             </>
           ) : (
@@ -47,6 +46,7 @@ const App = () => {
         <Route path="/mysentences" element={token ? <MySentencesPage /> : <Navigate to="/login" />} />
         <Route path="/admin/sentences" element={token && isAdmin ? <AllSentencesPage /> : <Navigate to="/login" />} />
         <Route path="/highscores" element={<HighscoresPage />} />
+        <Route path="*" element={<Navigate to="/" />} /> {/* ✅ fallback */}
       </Routes>
     </BrowserRouter>
   );
