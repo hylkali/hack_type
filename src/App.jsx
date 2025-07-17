@@ -11,7 +11,7 @@ import AllSentencesPage from './pages/AllSentencesPage';
 import HighscoresPage from './pages/HighscoresPage';
 
 const App = () => {
-  const { token, username, isAdmin, logout } = useContext(AuthContext); // ✅ isAdmin 추가
+  const { token, username, isAdmin, logout } = useContext(AuthContext); // ✅ isAdmin 포함
 
   return (
     <BrowserRouter>
